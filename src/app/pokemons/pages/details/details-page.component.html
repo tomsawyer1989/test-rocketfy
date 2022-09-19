@@ -1,1 +1,30 @@
-<h4>Details works</h4>
+<div class="row">
+    <div class="col-5 offset-2">
+        <img width="222" height="222" src="{{ image }}" alt="pokemon">
+    </div>
+    <div class="col-5">
+        <div class="card border-0">
+            <div class="card-body">
+                <h5 class="card-title text-center">{{ name }}</h5>
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-light ms-1" *ngFor="let item of types">{{ item.type.name }}</button>
+                </div>
+                <p class="card-text">
+                    {{ description }}
+                </p>
+                <div class="d-flex flex-column">
+                    <div>
+                        <strong>ID: </strong><label>{{ id }}</label>
+                    </div>
+                    <div>
+                        <strong>Altura: </strong><label>{{ height }}</label>
+                    </div>
+                    <div>
+                        <strong>Peso: </strong><label>{{ weight }}</label>
+                    </div>
+                </div>
+                <button class="w-100 mt-3 btn btn-danger">AGREGAR A FAVORITOS</button>
+            </div>
+        </div>
+    </div>
+</div>
