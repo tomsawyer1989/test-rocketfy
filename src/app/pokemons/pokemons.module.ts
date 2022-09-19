@@ -5,11 +5,13 @@ import { PokemonsRoutingModule } from './pokemons-routing.module';
 
 import { HomePageComponent } from './pages/home/home-page.component';
 import { DetailsPageComponent } from './pages/details/details-page.component';
+import { CardPokemonComponent } from './components/card-pokemon/card-pokemon.component';
 
 @NgModule({
     declarations: [
         HomePageComponent,
-        DetailsPageComponent
+        DetailsPageComponent,
+        CardPokemonComponent
     ],
     imports: [
         CommonModule,
