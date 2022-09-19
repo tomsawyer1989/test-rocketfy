@@ -7,7 +7,7 @@
             <div class="card-body">
                 <h5 class="card-title text-center">{{ name }}</h5>
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-light ms-1" *ngFor="let item of types">{{ item.type.name }}</button>
+                    <div class="p-1 alert alert-dark ms-1" role="alert" *ngFor="let item of types">{{ item.type.name }}</div>
                 </div>
                 <p class="card-text">
                     {{ description }}

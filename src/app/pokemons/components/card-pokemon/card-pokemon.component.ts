@@ -12,14 +12,14 @@ export class CardPokemonComponent {
 
     navigateTo(pokemon: any) {
         this.router.navigate(['/details',
-        {
-            id: pokemon.id,
-            name: pokemon.name,
-            height: pokemon.height,
-            weight: pokemon.weight,
-            types: JSON.stringify(pokemon.types),
-            image: pokemon.sprites.other['official-artwork'].front_default
-        }
-    ]);
+            {
+                id: pokemon.id,
+                name: pokemon.name,
+                height: pokemon.height,
+                weight: pokemon.weight,
+                types: JSON.stringify(pokemon.types),
+                image: pokemon.sprites.other['official-artwork'].front_default
+            }
+        ]);
     }
 }

@@ -1,19 +1,22 @@
 <div class="row">
-    <div class="card m-2 border-0" style="width: 22rem;" (click)="navigateTo(item)" *ngFor="let item of pokemons">
-        <div class="row">
-            <div class="col-4">
+    <div class="card m-2 border-0" style="width: 22rem;" *ngFor="let item of pokemons">
+        <div class="p-2 row">
+            <div class="col-4 d-flex align-items-center" (click)="navigateTo(item)">
                 <img src="{{ item.sprites.other['official-artwork'].front_default }}" class="card-img-top" alt="pokemon">
             </div>
-            <div class="col">
+            <div class="col-7">
                 <div class="card-body">
                     <div class="d-flex flex-column">
                         <label class="text-mute">{{ item.id }}</label>
                         <strong>{{ item.name }}</strong>
                     </div>
-                    <div>
-                        <button class="btn btn-light ms-1" *ngFor="let element of item.types">{{ element.type.name }}</button>
+                    <div class="d-flex">
+                        <div class="p-1 alert alert-dark ms-1" role="alert" *ngFor="let element of item.types">{{ element.type.name }}</div>
                     </div>
                 </div>
+            </div>
+            <div class="col-1">
+                <i class="bi bi-heart" style="font-size: 1em;"></i>
             </div>
         </div>
     </div>
