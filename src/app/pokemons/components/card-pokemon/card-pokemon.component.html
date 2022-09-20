@@ -1,7 +1,7 @@
 <div class="row">
     <div class="card m-2 border-0" style="width: 22rem;" *ngFor="let item of pokemons">
         <div class="p-2 row">
-            <div class="col-4 d-flex align-items-center" (click)="navigateTo(item)">
+            <div class="col-4 d-flex align-items-center" role="button" (click)="navigateTo(item)">
                 <img src="{{ item.sprites.other['official-artwork'].front_default }}" class="card-img-top" alt="pokemon">
             </div>
             <div class="col-7">
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="col-1">
-                <i class="bi bi-heart" style="font-size: 1em;"></i>
+                <i class="bi" [ngClass]="validateFavorites(item) ? 'bi-heart-fill' : 'bi-heart'" style="font-size: 1em;" role="button" (click)="addRemoveFavorites(item)"></i>
             </div>
         </div>
     </div>
