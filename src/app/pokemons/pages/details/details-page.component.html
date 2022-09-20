@@ -1,30 +1,30 @@
-<h4><i class="bi bi-arrow-left-short" role="button" (click)="backClicked();"></i> Detalles</h4>
+<h4><i class="bi bi-arrow-left-short" role="button" (click)="backClicked();" aria-label="icon"></i> Detalles</h4>
 <div class="row">
     <div class="col-12 col-lg-7 d-flex justify-content-center align-items-center">
-        <img width="222" height="222" src="{{ image }}" alt="pokemon">
+        <img width="222" height="222" src="{{ pokemon.sprites.other['official-artwork'].front_default }}" alt="pokemon">
     </div>
     <div class="col-12 col-lg-5">
         <div class="card border-0">
             <div class="card-body">
-                <h5 class="card-title text-center">{{ name }}</h5>
+                <h5 class="card-title text-center">{{ pokemon.name }}</h5>
                 <div class="d-flex justify-content-center">
-                    <div class="p-1 alert alert-dark ms-1" role="alert" *ngFor="let item of types">{{ item.type.name }}</div>
+                    <div class="p-1 alert alert-dark ms-1" role="alert" *ngFor="let item of pokemon.types">{{ item.type.name }}</div>
                 </div>
                 <p class="card-text">
                     {{ description }}
                 </p>
                 <div class="d-flex flex-column">
                     <div>
-                        <strong>ID: </strong><label>{{ id }}</label>
+                        <strong>ID: </strong><label>{{ pokemon.id }}</label>
                     </div>
                     <div>
-                        <strong>Altura: </strong><label>{{ height }}</label>
+                        <strong>Altura: </strong><label>{{ pokemon.height }}</label>
                     </div>
                     <div>
-                        <strong>Peso: </strong><label>{{ weight }}</label>
+                        <strong>Peso: </strong><label>{{ pokemon.weight }}</label>
                     </div>
                 </div>
-                <button class="w-100 mt-3 btn btn-danger" [ngClass]="validateFavorites(id) ? 'd-none' : 'd-block'">AGREGAR A FAVORITOS</button>
+                <button class="w-100 mt-3 btn btn-danger" [ngClass]="validateFavorites(pokemon) ? 'd-none' : 'd-block'" (click)="addFavorites(pokemon)">AGREGAR A FAVORITOS</button>
             </div>
         </div>
     </div>

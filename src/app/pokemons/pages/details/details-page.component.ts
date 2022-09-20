@@ -11,12 +11,7 @@ import { Pokemon } from "../../interfaces/pokemon.interface";
     templateUrl: './details-page.component.html'
 })
 export class DetailsPageComponent implements OnInit {
-    id: number = 0;
-    name: string = '';
-    height: number = 0;
-    weight: number = 0;
-    types: any[] = [];
-    image: string = '';
+    pokemon!: Pokemon;
     description: any = null;
     favorites: Pokemon[] = [];
 
@@ -33,15 +28,9 @@ export class DetailsPageComponent implements OnInit {
 
         this.route.params.subscribe(async (params: any) => {
             const pokemon = JSON.parse(params.pokemon);
-
-            this.id = pokemon.id;
-            this.name = pokemon.name;
-            this.height = pokemon.height;
-            this.weight = pokemon.weight;
-            this.types = pokemon.types;
-            this.image = pokemon.sprites.other['official-artwork'].front_default;
-
-            const response = await lastValueFrom(this.pokemonsServices.getDescription(this.id));
+            this.pokemon = { ...pokemon };
+            
+            const response = await lastValueFrom(this.pokemonsServices.getDescription(this.pokemon.id));
             const data = response.flavor_text_entries.filter((item: any) => item.language.name === 'es')[0];
             this.description = data.flavor_text;
         });
@@ -51,7 +40,13 @@ export class DetailsPageComponent implements OnInit {
         this._location.back();
     }
 
-    validateFavorites(id: number): boolean {
-        return this.favorites.some((item: Pokemon) => item.id === id);
+    validateFavorites(pokemon: Pokemon): boolean {
+        return this.favorites.some((item: Pokemon) => item.id === pokemon.id);
+    }
+
+    addFavorites(pokemon: Pokemon) {
+        this.favorites = [...this.favorites, pokemon];
+        
+        localStorage.setItem('favorites', JSON.stringify(this.favorites));
     }
 }
