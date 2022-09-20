@@ -24,7 +24,7 @@
                         <strong>Peso: </strong><label>{{ weight }}</label>
                     </div>
                 </div>
-                <button class="w-100 mt-3 btn btn-danger">AGREGAR A FAVORITOS</button>
+                <button class="w-100 mt-3 btn btn-danger" [ngClass]="validateFavorites(id) ? 'd-none' : 'd-block'">AGREGAR A FAVORITOS</button>
             </div>
         </div>
     </div>

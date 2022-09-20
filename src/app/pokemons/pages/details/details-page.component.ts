@@ -16,17 +16,24 @@ export class DetailsPageComponent implements OnInit {
     types: any[] = [];
     image: string = '';
     description: any = null;
+    favorites: any[] = [];
 
     constructor(private route: ActivatedRoute,
         private pokemonsServices: PokemonsService,
         private _location: Location) { }
 
     ngOnInit(): void {
+        const favoritesStorage: any = localStorage.getItem('favorites');
+        
+        if (favoritesStorage) {
+            this.favorites = JSON.parse(favoritesStorage);
+        }
+
         this.route.params.subscribe(async (params: any) => {
-            this.id = params.id;
+            this.id = JSON.parse(params.id);
             this.name = params.name;
-            this.height = params.height;
-            this.weight = params.weight;
+            this.height = JSON.parse(params.height);
+            this.weight = JSON.parse(params.weight);
             this.types = JSON.parse(params.types);
             this.image = params.image;
 
@@ -38,5 +45,9 @@ export class DetailsPageComponent implements OnInit {
 
     backClicked() {
         this._location.back();
+    }
+
+    validateFavorites(id: number): boolean {
+        return this.favorites.some((item: any) => item.id === id);
     }
 }
