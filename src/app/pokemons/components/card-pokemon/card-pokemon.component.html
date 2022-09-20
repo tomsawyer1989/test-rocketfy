@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="col-1">
-                <i class="bi" [ngClass]="validateFavorites(item) ? 'bi-heart-fill' : 'bi-heart'" style="font-size: 1em;" role="button" (click)="addRemoveFavorites(item)"></i>
+                <i class="bi text-danger" [ngClass]="validateFavorites(item) ? 'bi-heart-fill' : 'bi-heart'" style="font-size: 1em;" role="button" (click)="addRemoveFavorites(item)" aria-label="icon"></i>
             </div>
         </div>
     </div>
