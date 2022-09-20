@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { lastValueFrom } from "rxjs";
 import { PokemonsService } from "../../services/pokemons.service";
@@ -16,7 +17,9 @@ export class DetailsPageComponent implements OnInit {
     image: string = '';
     description: any = null;
 
-    constructor(private route: ActivatedRoute, private pokemonsServices: PokemonsService) {}
+    constructor(private route: ActivatedRoute,
+        private pokemonsServices: PokemonsService,
+        private _location: Location) { }
 
     ngOnInit(): void {
         this.route.params.subscribe(async (params: any) => {
@@ -31,5 +34,9 @@ export class DetailsPageComponent implements OnInit {
             const data = response.flavor_text_entries.filter((item: any) => item.language.name === 'es')[0];
             this.description = data.flavor_text;
         });
+    }
+
+    backClicked() {
+        this._location.back();
     }
 }
