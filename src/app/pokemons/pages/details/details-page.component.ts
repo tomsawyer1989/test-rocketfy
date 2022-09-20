@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { lastValueFrom } from "rxjs";
 import { PokemonsService } from "../../services/pokemons.service";
 
+import { Pokemon } from "../../interfaces/pokemon.interface";
+
 @Component({
     selector: 'app-details-page',
     templateUrl: './details-page.component.html'
@@ -16,7 +18,7 @@ export class DetailsPageComponent implements OnInit {
     types: any[] = [];
     image: string = '';
     description: any = null;
-    favorites: any[] = [];
+    favorites: Pokemon[] = [];
 
     constructor(private route: ActivatedRoute,
         private pokemonsServices: PokemonsService,
@@ -30,12 +32,14 @@ export class DetailsPageComponent implements OnInit {
         }
 
         this.route.params.subscribe(async (params: any) => {
-            this.id = JSON.parse(params.id);
-            this.name = params.name;
-            this.height = JSON.parse(params.height);
-            this.weight = JSON.parse(params.weight);
-            this.types = JSON.parse(params.types);
-            this.image = params.image;
+            const pokemon = JSON.parse(params.pokemon);
+
+            this.id = pokemon.id;
+            this.name = pokemon.name;
+            this.height = pokemon.height;
+            this.weight = pokemon.weight;
+            this.types = pokemon.types;
+            this.image = pokemon.sprites.other['official-artwork'].front_default;
 
             const response = await lastValueFrom(this.pokemonsServices.getDescription(this.id));
             const data = response.flavor_text_entries.filter((item: any) => item.language.name === 'es')[0];
@@ -48,6 +52,6 @@ export class DetailsPageComponent implements OnInit {
     }
 
     validateFavorites(id: number): boolean {
-        return this.favorites.some((item: any) => item.id === id);
+        return this.favorites.some((item: Pokemon) => item.id === id);
     }
 }

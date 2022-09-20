@@ -1,13 +1,15 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Router } from '@angular/router';
 
+import { Pokemon } from "../../interfaces/pokemon.interface";
+
 @Component({
     selector: 'app-card-pokemon',
     templateUrl: './card-pokemon.component.html'
 })
 export class CardPokemonComponent implements OnInit {
-    @Input() pokemons: any[] = [];
-    favorites: any[] = [];
+    @Input() pokemons: Pokemon[] = [];
+    favorites: Pokemon[] = [];
 
     constructor(private router: Router) {}
 
@@ -19,29 +21,20 @@ export class CardPokemonComponent implements OnInit {
         }
     }
 
-    navigateTo(pokemon: any) {
-        this.router.navigate(['/details',
-            {
-                id: pokemon.id,
-                name: pokemon.name,
-                height: pokemon.height,
-                weight: pokemon.weight,
-                types: JSON.stringify(pokemon.types),
-                image: pokemon.sprites.other['official-artwork'].front_default
-            }
-        ]);
+    navigateTo(pokemon: Pokemon) {
+        this.router.navigate(['/details', { pokemon: JSON.stringify(pokemon) }]);
     }
 
-    validateFavorites(pokemon: any): boolean {
-        return this.favorites.some((item: any) => item.id === pokemon.id);
+    validateFavorites(pokemon: Pokemon): boolean {
+        return this.favorites.some((item: Pokemon) => item.id === pokemon.id);
     }
 
-    addRemoveFavorites(pokemon: any) {
+    addRemoveFavorites(pokemon: Pokemon) {
         if (!this.validateFavorites(pokemon)) {
             this.favorites = [...this.favorites, pokemon];
         }
         else {
-            this.favorites = this.favorites.filter((item: any) => item.id !== pokemon.id);
+            this.favorites = this.favorites.filter((item: Pokemon) => item.id !== pokemon.id);
         }
         
         localStorage.setItem('favorites', JSON.stringify(this.favorites));

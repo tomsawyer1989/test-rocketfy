@@ -3,9 +3,18 @@ export interface Pokemon {
     name: string;
     height: number;
     weight: number;
-    sprites: {}
-}
-
-export interface Description {
-    flavor_text_entries: []
+    types: [
+        {
+            type: {
+                name: string
+            }
+        }
+    ],
+    sprites: {
+        other: {
+            'official-artwork': {
+                'front_default': string
+            }
+        }
+    }
 }
